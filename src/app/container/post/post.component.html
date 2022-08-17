@@ -1,0 +1,40 @@
+<h2 class="bg-light text-dark p-4">HTTP Call Angular</h2>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <form #postForm="ngForm" (ngSubmit)="onSubmit(postForm.value)">
+                    <div class="form-group">
+                        <label for="title"><strong>Title</strong></label>
+                        <input ngModel type="text" name="title" id="title" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="content"><strong>Content</strong></label>
+                        <input ngModel type="text" name="content" id="content" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit" *ngIf="!isUpdating; else updateBtn">Add Post</button>
+                        <ng-template #updateBtn>
+                            <button class="btn btn-success" type="button" (click)="onUpdate()">Update Post</button>
+                        </ng-template>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card mb-4" *ngFor="let post of postArr">
+            <div class="card-header">
+                {{post.title}}
+            </div>
+            <div class="card-body">
+                {{post.content}}
+            </div>
+            <div class="icons">
+                <i class="fas fa-edit text-success mr-2" (click)="onEdit(post)"></i>
+                <i class="fas fa-trash text-danger" (click)="onDelete(post)"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
